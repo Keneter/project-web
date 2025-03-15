@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head>
+    <title>PHP Sedang Berulang Tahun</title>
+    <style>
+        .container{
+            border: 4px solid rgb(119, 200, 255);
+            border-color: #00a6e8;
+            background-color: #63caed;
+            justify-content: left;
+            align-items: left;
+            padding: 10px;
+            height: 150px;
+            width: 250px;
+            margin: 0;
+        }
+        button{
+            border-color: white;
+            color: white;
+            background-color: #00a6e8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p><b>PHP</b> Sedang Berulang Tahun</p>
+        <div id="koment"></div>
+        <input type="text" id="inputan" placeholder="Komentar.." oninput="showTyping()">
+        <p id="status"></p>
+        <button onclick="komentar()">Komentar</button>
+    </div>
+    <script>
+        function showTyping() {
+            document.getElementById('status').textContent = 'Anda Sedang Mengetik...';
+        }
+        function komentar() {
+            let inputan = document.getElementById('inputan').value;
+            if (inputan.length > 0) {
+                let koment = document.getElementById("koment");
+                let komentnew = document.createElement("p");
+                let boldText = document.createElement("b");
+                boldText.textContent = "JavaScript : ";
+                komentnew.appendChild(boldText);
+                komentnew.appendChild(document.createTextNode(inputan));
+                koment.appendChild(komentnew);
+                document.getElementById('inputan').value = '';
+                document.getElementById('status').textContent = ''; 
+            } else {
+                alert('Mohon masukkan komentar!');
+            }
+        }
+    </script>
+</body>
+</html>

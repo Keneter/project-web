@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+  <title>Penginputan Nilai</title>
+  <style>
+    body {
+        background-color: rgba(203, 130, 19, 0.692);
+    }
+    #hasil {
+      margin-top: 40px;
+      padding: 40px;
+      font-size: 40px;
+      font-weight: bold;
+      color: rgb(0, 0, 0);
+    }
+  </style>
+<body>
+  <div id="hasil"></div>
+  <h2>Inputan Nilai</h2>
+  <input type="text" id="Nilai">
+  <button onclick="checkGrade()">Nilai</button>
+    
+  <script>
+    function checkGrade() {
+      let nilai = document.getElementById("Nilai").value;
+      let nilaiM = document.getElementById("hasil");
+      nilaiM.style.display = 'block';
+      if (nilai >= 85) {
+        nilaiM.textContent = "Mendapatkan Nilai A";
+        nilaiM.style.backgroundColor = "green";
+      } else if (nilai >= 75 && nilai <= 79) {
+        nilaiM.textContent = "Mendapatkan Nilai B+";
+        nilaiM.style.backgroundColor = "orange";
+      } else if (nilai >= 60 && nilai <= 64) {
+        nilaiM.textContent = "Mendapatkan Nilai C+";
+        nilaiM.style.backgroundColor = "yellow";
+      } else if (nilai < 50) {
+        nilaiM.textContent = "Mendapatkan Nilai E";
+        nilaiM.style.backgroundColor = "red";
+      }
+    }
+  </script>
+</body>
+</html>

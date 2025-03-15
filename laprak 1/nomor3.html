@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Biodata</title>
+</head>
+<body>
+    <form id="biodataForm">
+        <p>NIM: <input type="text" name="nim" required></p>
+        <p>Nama: <input type="text" name="nama" required></p>
+        <p>Tanggal Lahir: <input type="date" name="tanggalLahir" required></p>
+        <p>Jenis Kelamin: 
+        <input type="radio" name="jenisKelamin" value="Laki-laki" required> Laki-laki
+        <input type="radio" name="jenisKelamin" value="Perempuan"> Perempuan</p>
+        <p>Agama: <select name="agama" required>
+            <option value="">--Agama--</option>
+            <option>Islam</option>
+            <option>Kristen</option>
+            <option>Hindu</option>
+            <option>Buddha</option>
+            <option>Konghucu</option>
+        </select></p>
+        <p>Alamat: <input type="text" name="alamat" required></p>
+        <div style="margin-left: 230px">
+        <button type="submit">Submit</button>
+        </div>
+    </form>
+    <h2>Data Biodata</h2>
+    <table border="1">
+        <tr>
+            <th>No</th>
+            <th>NIM</th>
+            <th>Nama</th>
+            <th>Tanggal Lahir</th>
+            <th>Jenis Kelamin</th>
+            <th>Agama</th>
+            <th>Alamat</th>
+        </tr>
+        <tbody id="tableBody"></tbody>
+    </table>
+    <script>
+        let count = 0;
+        const form = document.getElementById('biodataForm');
+        const tbody = document.getElementById('tableBody');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const inputs = form.querySelectorAll('[required]');
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!input.value) {
+                    isValid = false;
+                    input.reportValidity();
+                }
+            });
+            if (!isValid) return;
+            count++;
+            const formData = new FormData(form);
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${count}</td>
+                <td>${formData.get('nim')}</td>
+                <td>${formData.get('nama')}</td>
+                <td>${formData.get('tanggalLahir')}</td>
+                <td>${formData.get('jenisKelamin')}</td>
+                <td>${formData.get('agama')}</td>
+                <td>${formData.get('alamat')}</td>
+            `;
+            tbody.appendChild(newRow);
+            form.reset();
+        });
+    </script>
+</body>
+</html>
