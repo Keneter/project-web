@@ -1,0 +1,231 @@
+composer create-project laravel/laravel portofolio
+cd portofolio
+
+php artisan make:controller PortofolioController
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class PortofolioController extends Controller
+{
+    public function home()
+    {
+        return view('layouts.home');
+    }
+
+    public function about()
+    {
+        return view('layouts.about');
+    }
+
+    public function skills()
+    {
+        return view('layouts.skills');
+    }
+
+    public function works()
+    {
+        return view('layouts.works');
+    }
+
+    public function contact()
+    {
+        return view('layouts.contact');
+    }
+}
+
+
+routes/web.php
+use App\Http\Controllers\PortofolioController;
+
+Route::get('/', [PortofolioController::class, 'home'])->name('home');
+Route::get('/about', [PortofolioController::class, 'about'])->name('about');
+Route::get('/skills', [PortofolioController::class, 'skills'])->name('skills');
+Route::get('/works', [PortofolioController::class, 'works'])->name('works');
+Route::get('/contact', [PortofolioController::class, 'contact'])->name('contact');
+
+
+public/css/style.css
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em 0;
+}
+
+header nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.5em;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    color: #4caf50;
+}
+
+main {
+    padding: 2em;
+    max-width: 800px;
+    margin: auto;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+    margin-top: 2em;
+}
+
+h1, h2 {
+    color: #4caf50;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+form input, form textarea, form button {
+    padding: 0.8em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+
+vies/layouts/app.blade.php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'Portfolio')</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ route('home') }}">Home</a>
+            <a href="{{ route('about') }}">About</a>
+            <a href="{{ route('skills') }}">Skills</a>
+            <a href="{{ route('works') }}">Works</a>
+            <a href="{{ route('contact') }}">Contact</a>
+        </nav>
+    </header>
+    <main>
+        @yield('content')
+    </main>
+    <footer>
+        <p>© 2025 Your Name</p>
+    </footer>
+</body>
+</html>
+
+
+
+home.blade.php
+@extends('layouts.app')
+
+@section('title', 'Home')
+
+@section('content')
+<div>
+    <img src="{{ asset('images/avatar.png') }}" alt="Avatar" style="width: 100px; border-radius: 50%; display: block; margin: 0 auto;">
+    <h1 style="text-align: center;">Hi, I am Fulan</h1>
+    <p style="text-align: center;">Web Designer</p>
+    <a href="{{ route('contact') }}" style="display: block; width: max-content; margin: 1em auto; padding: 0.5em 1em; background-color: #4caf50; color: white; text-decoration: none; text-align: center; border-radius: 4px;">Contact</a>
+</div>
+@endsection
+
+
+
+about.blade.php
+@extends('layouts.app')
+
+@section('title', 'About')
+
+@section('content')
+<h1>About Me</h1>
+<p>I am Fulan.</p>
+@endsection
+
+
+
+skills.blade.php
+@extends('layouts.app')
+
+@section('title', 'Skills')
+
+@section('content')
+<h1>My Skills</h1>
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+    <li>Laravel</li>
+</ul>
+@endsection
+
+
+works.blade.php
+@extends('layouts.app')
+
+@section('title', 'Works')
+
+@section('content')
+<h1>My Projects</h1>
+<ul>
+    <li><strong>Project 1:</strong> A personal website.</li>
+    <li><strong>Project 2:</strong> An e-commerce app.</li>
+</ul>
+@endsection
+
+
+
+contact.blade.php
+@extends('layouts.app')
+
+@section('title', 'Contact')
+
+@section('content')
+<h1>Contact Me</h1>
+<form>
+    <input type="text" name="name" placeholder="Your Name">
+    <input type="email" name="email" placeholder="Your Email">
+    <textarea name="message" placeholder="Your Message"></textarea>
+    <button type="submit">Send</button>
+</form>
+@endsection
+
+
+
